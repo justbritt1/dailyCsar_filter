@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Update Results</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      table.data {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      table.data th, table.data td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+      }
+      table.data th {
+        background-color: #f4f4f4;
+      }
+      .success {
+        color: green;
+        font-weight: bold;
+      }
+      .info {
+        background-color: #e7f3ff;
+        padding: 15px;
+        border-left: 4px solid #2196F3;
+        margin: 20px 0;
+      }
+      .download-btn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 4px;
+        display: inline-block;
+        margin: 10px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Master CSV Updated Successfully!</h1>
+
+    <div class="info">
+      <p class="success">✓ Total Changes Detected: {{ num_changes }}</p>
+      <a href="/download" class="download-btn">Download Updated Master CSV</a>
+    </div>
+
+    <p><a href="/">← Upload Another File</a></p>
+  </body>
+</html>
