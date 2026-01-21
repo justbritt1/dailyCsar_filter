@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Select Master CSV</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+      table.data {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+      }
+      table.data th, table.data td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+      }
+      table.data th {
+        background-color: #f4f4f4;
+      }
+      .section {
+        margin: 30px 0;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Step 2: Select Master CSV File to Update</h1>
+    
+    <div class="section">
+      <h2>Preview of New Data (First 10 Rows)</h2>
+      {% if preview %}
+        {{ preview | safe }}
+      {% endif %}
+    </div>
+
+    <div class="section">
+      <h2>Browse and Select Your Master CSV</h2>
+      <p>Select the existing CSV file you want to update with the new data.</p>
+      
+      <form method="post" enctype="multipart/form-data">
+        <input type="file" name="master_file" accept=".csv,.xlsx,.xls" required>
+        <input type="submit" value="Update Master CSV">
+      </form>
+    </div>
+
+    <p><a href="/">← Start Over</a></p>
+  </body>
+</html>
