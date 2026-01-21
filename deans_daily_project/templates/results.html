@@ -381,24 +381,27 @@
       }
 
       // Table sorting functionality
+      let sortState = { column: -1, direction: 'asc' };
+      
       function sortTable(columnIndex) {
         const table = document.getElementById('changesTable');
         const tbody = table.querySelector('tbody');
         const rows = Array.from(tbody.querySelectorAll('tr'));
         
+        // Toggle direction if same column, otherwise reset to ascending
+        if (sortState.column === columnIndex) {
+          sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
+        } else {
+          sortState.column = columnIndex;
+          sortState.direction = 'asc';
+        }
+        
         const sortedRows = rows.sort((a, b) => {
           const aText = a.cells[columnIndex].textContent.trim();
           const bText = b.cells[columnIndex].textContent.trim();
-          return aText.localeCompare(bText);
+          const comparison = aText.localeCompare(bText);
+          return sortState.direction === 'asc' ? comparison : -comparison;
         });
-        
-        // Toggle sort direction
-        if (table.dataset.lastSort === String(columnIndex)) {
-          sortedRows.reverse();
-          table.dataset.lastSort = '';
-        } else {
-          table.dataset.lastSort = columnIndex;
-        }
         
         // Re-append sorted rows
         sortedRows.forEach(row => tbody.appendChild(row));

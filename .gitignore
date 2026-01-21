@@ -1,0 +1,27 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Flask
+instance/
+.webassets-cache
+
+# Temporary CSV files
+temp_new_data.csv
+temp_master.csv
+temp_master.xlsx
+updated_master.csv
+updated_master.xlsx
+
+# Environment
+.env
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

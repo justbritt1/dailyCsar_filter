@@ -14,7 +14,6 @@ columns_to_compare = ["Sec Faculty Info", "Sec All Faculty Last Names", "Total F
 
 # Alert thresholds
 FTE_CHANGE_THRESHOLD = 0.10  # 10% change threshold
-CAPACITY_CHECK_COLUMNS = ["FTE Count", "Capacity"]
 FACULTY_COLUMNS = ["Sec Faculty Info", "Sec All Faculty Last Names"]
 CRITICAL_COLUMNS = ["Sec Faculty Info", "Total FTE", "FTE Count"]
 
@@ -298,10 +297,11 @@ def select_master():
                         alerts_list.append(alert)
             
             # Build updated master using vectorized operations
-            # Start with rows that exist in both (updated with new values)
-            updated_master = master_df.drop('_master_flag', axis=1).copy()
+            # Start with all rows from master, then update with new values
+            updated_master = master_df.drop('_master_flag', axis=1, errors='ignore').copy()
             
-            # Update existing rows with new values
+            # Update existing rows with new values (needed for Excel formatting preservation)
+            # Note: This loop is required to maintain Excel cell formatting when is_excel=True
             for idx, new_row in new_df.iterrows():
                 sec_name = new_row[key_column]
                 master_idx = master_df[master_df[key_column] == sec_name].index
